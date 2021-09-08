@@ -37,15 +37,17 @@ public class Encode {
 			}
 			else
 			{
-				dict.put(current + next, BinaryOutput.get(dictValue));
+				int binary = BinaryOutput.get(dictValue);
+				dict.put(current + next, binary);
+				output.append(" " + binary);
 				dictValue++;
-				output.append(current);
 				current = next;
 				next = "" + (char)buffy.read();
 			}
-			
-			
 		}
+		
+		buffy.close();
+
 	}
 
 	

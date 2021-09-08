@@ -16,12 +16,22 @@ public class Encode {
 		this.output = new StringBuilder();
 		dict = new HashMap <String, Integer> ();
 		
+		this.fillInitialValues();
+		
+		this.fillDict (inputFile);
+	}
+	
+	private void fillInitialValues()
+	{
 		for (int x = 0; x<266; x++)
 		{
 			char ch = (char)x;
-			dict.put(String.valueOf(ch), BinaryOutput.get(x));
+			dict.put(String.valueOf(ch), BinaryConvert.get(x));
 		}
-		
+	}
+	
+	private void fillDict (File inputFile) throws IOException
+	{
 		BufferedReader buffy = new BufferedReader (new FileReader(inputFile));
 		
 		String current = "" +(char)buffy.read();
@@ -37,7 +47,7 @@ public class Encode {
 			}
 			else
 			{
-				int binary = BinaryOutput.get(dictValue);
+				int binary = BinaryConvert.get(dictValue);
 				dict.put(current + next, binary);
 				output.append(" " + binary);
 				dictValue++;
@@ -47,7 +57,11 @@ public class Encode {
 		}
 		
 		buffy.close();
-
+	}
+	
+	public String getBinaryOutput()
+	{
+		return output.toString();
 	}
 
 	

@@ -1,5 +1,5 @@
 
-public class BinaryOutput {
+public class BinaryConvert {
 	
 	public static int get(int decimal)
 	{

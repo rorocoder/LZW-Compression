@@ -8,18 +8,18 @@ import java.util.Hashtable;
 
 public class Encode {
 //	private String input;
-	private String output;
+	private StringBuilder output;
 	private HashMap<String, Integer> dict;
 	
 	public Encode (File inputFile) throws IOException
 	{
-		this.output = "";
+		this.output = new StringBuilder();
 		dict = new HashMap <String, Integer> ();
 		
 		for (int x = 0; x<266; x++)
 		{
 			char ch = (char)x;
-			dict.put(String.valueOf(ch), x);
+			dict.put(String.valueOf(ch), BinaryOutput.get(x));
 		}
 		
 		BufferedReader buffy = new BufferedReader (new FileReader(inputFile));
@@ -37,9 +37,9 @@ public class Encode {
 			}
 			else
 			{
-				dict.put(current + next, dictValue);
+				dict.put(current + next, BinaryOutput.get(dictValue));
 				dictValue++;
-				output +=current;
+				output.append(current);
 				current = next;
 				next = "" + (char)buffy.read();
 			}

@@ -1,13 +1,10 @@
 
 public class BinaryOutput {
-	private int decimal;
-	private int binary;
 	
-	
-	public BinaryOutput(int decimal)
+	public static int get(int decimal)
 	{
-		binary = 0;
-		this.decimal = decimal;
+		
+		int binary = 0;
 		double counter = .1;
 		while (decimal != 0)
 		{
@@ -16,12 +13,10 @@ public class BinaryOutput {
 			decimal = decimal/2;
 			counter = counter*10;
 		}
-	}
-	
-	public int getBinary ()
-	{
 		return binary;
 	}
+	
+
 
 	
 }

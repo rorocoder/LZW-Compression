@@ -38,7 +38,13 @@ public class Encode {
 			else
 			{
 				dict.put(current + next, dictValue);
+				dictValue++;
+				output +=current;
+				current = next;
+				next = "" + (char)buffy.read();
 			}
+			
+			
 		}
 	}
 

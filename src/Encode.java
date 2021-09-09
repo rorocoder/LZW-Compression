@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
@@ -8,17 +9,19 @@ import java.util.Hashtable;
 
 public class Encode {
 //	private String input;
-	private StringBuilder output;
+	private String stringOutput;
 	private HashMap<String, Integer> dict;
+	private byte [] outputInByteArray;
 	
 	public Encode (File inputFile) throws IOException
 	{
-		this.output = new StringBuilder();
+		stringOutput = "";
+		outputInByteArray = null;
 		dict = new HashMap <String, Integer> ();
 		
 		this.fillInitialValues();
-		
 		this.fillDict (inputFile);
+		this.populateByteArray();
 	}
 	
 	private void fillInitialValues()
@@ -49,7 +52,7 @@ public class Encode {
 			{
 				int binary = BinaryConvert.get(dictValue);
 				dict.put(current + next, binary);
-				output.append(" " + binary);
+				stringOutput += " " + binary;
 				dictValue++;
 				current = next;
 				next = "" + (char)buffy.read();
@@ -59,9 +62,20 @@ public class Encode {
 		buffy.close();
 	}
 	
-	public String getBinaryOutput()
+	private void populateByteArray()
 	{
-		return output.toString();
+		BinaryCodec helper = new BinaryCodec();
+		outputInByteArray = helper.toByteArray(stringOutput);
+	}
+	
+	public File getBinaryOutput() throws IOException
+	{
+		File output = new File ("output.bin");
+		FileOutputStream fos = new FileOutputStream(output);
+		fos.write(outputInByteArray);
+		fos.close();
+		
+		return output;
 	}
 
 	

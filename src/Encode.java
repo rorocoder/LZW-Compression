@@ -49,7 +49,7 @@ public class Encode {
 			else
 			{
 				int outputAddition = dict.get (current);
-				stringOutput += " " + outputAddition;
+//				stringOutput += " " + outputAddition;
 				binaryString += toBinary (outputAddition, 9); 
 
 				
@@ -68,29 +68,13 @@ public class Encode {
 		byte[] outputInBytes = BinaryCodec.fromAscii (encodedChars);
 				
 		FileOutputStream fos = new FileOutputStream("trashbin");
-//		"/Users/arianaazarbal/eclipse-workspace/Encoder/compressedFile.bin"
 		fos.write(outputInBytes);
 		fos.close();
 
 				
-		System.out.println (stringOutput);
+//		System.out.println (stringOutput);
 	}
 	
-//	private void populateByteArray()
-//	{
-//		BinaryCodec helper = new BinaryCodec();
-//		outputInByteArray = helper.toByteArray(stringOutput);
-//	}
-//	
-//	public File getBinaryOutput() throws IOException
-//	{
-//		File output = new File ("output.bin");
-//		FileOutputStream fos = new FileOutputStream(output);
-//		fos.write(outputInByteArray);
-//		fos.close();
-//		
-//		return output;
-//	}
 	
 	public static String toBinary (int x, int len)
 	{

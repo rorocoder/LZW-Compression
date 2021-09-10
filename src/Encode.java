@@ -11,17 +11,14 @@ public class Encode {
 //	private String input;
 	private String stringOutput;
 	private HashMap<String, Integer> dict;
-	private byte [] outputInByteArray;
 	
 	public Encode (File inputFile) throws IOException
 	{
 		stringOutput = "";
-		outputInByteArray = null;
 		dict = new HashMap <String, Integer> ();
 		
 		this.fillInitialValues();
-		this.fillDict (inputFile);
-		this.populateByteArray();
+		this.compress (inputFile);
 	}
 	
 	private void fillInitialValues()
@@ -33,14 +30,14 @@ public class Encode {
 		}
 	}
 	
-	private void fillDict (File inputFile) throws IOException
+	private void compress (File inputFile) throws IOException
 	{
 		BufferedReader buffy = new BufferedReader (new FileReader(inputFile));
 		
 		String current = "" +(char)buffy.read();
 		String next = "" + (char)buffy.read();
 		int dictValue = 256;
-		
+		String binaryString= "";
 		for (int x = 0; x<inputFile.length(); x++)
 		{
 			if (dict.containsKey(current+next))
@@ -50,36 +47,59 @@ public class Encode {
 			}
 			else
 			{
-				int binary = BinaryConvert.get(dictValue);
-				dict.put(current + next, binary);
-				stringOutput += " " + binary;
+//				int binary = dict.getCurrent
+//				int binary = BinaryConvert.get(dictValue);
+				
+				dict.put(current + next, dictValue);
+				stringOutput += " " + dictValue;
+
+				binaryString += toBinary (dictValue, 9); 
 				dictValue++;
 				current = next;
 				next = "" + (char)buffy.read();
+				
 			}
 		}
-		
 		buffy.close();
-	}
-	
-	private void populateByteArray()
-	{
-		BinaryCodec helper = new BinaryCodec();
-		outputInByteArray = helper.toByteArray(stringOutput);
-	}
-	
-	public File getBinaryOutput() throws IOException
-	{
-		File output = new File ("output.bin");
-		FileOutputStream fos = new FileOutputStream(output);
-		fos.write(outputInByteArray);
+		
+		char [] encodedChars = binaryString.toCharArray ();
+				
+		byte[] outputInBytes = BinaryCodec.fromAscii (encodedChars);
+				
+		FileOutputStream fos = new FileOutputStream("/Users/arianaazarbal/eclipse-workspace/Encoder/compressedFile.bin");
+		fos.write(outputInBytes);
 		fos.close();
-		
-		return output;
-	}
 
+				
+		System.out.println (stringOutput);
+	}
 	
-		
+//	private void populateByteArray()
+//	{
+//		BinaryCodec helper = new BinaryCodec();
+//		outputInByteArray = helper.toByteArray(stringOutput);
+//	}
+//	
+//	public File getBinaryOutput() throws IOException
+//	{
+//		File output = new File ("output.bin");
+//		FileOutputStream fos = new FileOutputStream(output);
+//		fos.write(outputInByteArray);
+//		fos.close();
+//		
+//		return output;
+//	}
+	
+	public static String toBinary (int x, int len)
+	{
+		if (len>0)
+		{
+			return String.format("%" + len + "s", Integer.toBinaryString(x)).replaceAll(" ", "0");
+		}
+		return null;
+	}
+	
+
 
 	
 	

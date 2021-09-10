@@ -23,10 +23,10 @@ public class Encode {
 	
 	private void fillInitialValues()
 	{
-		for (int x = 0; x<266; x++)
+		for (int x = 0; x<256; x++)
 		{
 			char ch = (char)x;
-			dict.put(String.valueOf(ch), BinaryConvert.get(x));
+			dict.put(String.valueOf(ch), x);
 		}
 	}
 	
@@ -44,16 +44,17 @@ public class Encode {
 			{
 				current = current+next;
 				next = "" + (char)buffy.read();
+				 
 			}
 			else
 			{
-//				int binary = dict.getCurrent
-//				int binary = BinaryConvert.get(dictValue);
+				int outputAddition = dict.get (current);
+				stringOutput += " " + outputAddition;
+				binaryString += toBinary (outputAddition, 9); 
+
 				
 				dict.put(current + next, dictValue);
-				stringOutput += " " + dictValue;
 
-				binaryString += toBinary (dictValue, 9); 
 				dictValue++;
 				current = next;
 				next = "" + (char)buffy.read();
@@ -66,7 +67,8 @@ public class Encode {
 				
 		byte[] outputInBytes = BinaryCodec.fromAscii (encodedChars);
 				
-		FileOutputStream fos = new FileOutputStream("/Users/arianaazarbal/eclipse-workspace/Encoder/compressedFile.bin");
+		FileOutputStream fos = new FileOutputStream("trashbin");
+//		"/Users/arianaazarbal/eclipse-workspace/Encoder/compressedFile.bin"
 		fos.write(outputInBytes);
 		fos.close();
 

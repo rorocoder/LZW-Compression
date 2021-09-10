@@ -1,0 +1,8 @@
+Hello, 
+
+Here's my code. It should be working and accurate, if not let me know. The LZWCompression class inputs a file and first
+uses the method fillInitialValues() to fill the HashMap dict with the pre-determined askii values for chars. 
+It then calls the method compress which uses a buffered reader and a for loop to run through each char in the file. 
+It adds combinations of these chars with arbitrary, decimal askii values to dict. The for loop also converts these 
+decimals to binary before adding them to the string binaryString. binaryString is converted into a char array of 0s and 1s, 
+which is then converted to a byte array, which is then used by the FileOutputStream to write a binary file. 

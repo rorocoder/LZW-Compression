@@ -9,12 +9,12 @@ import java.util.Hashtable;
 
 public class LZWCompression {
 //	private String input;
-	private String stringOutput;
+//	private String stringOutput;
 	private HashMap<String, Integer> dict;
 	
 	public LZWCompression (File inputFile) throws IOException
 	{
-		stringOutput = "";
+//		stringOutput = "";
 		dict = new HashMap <String, Integer> ();
 		
 		this.fillInitialValues();

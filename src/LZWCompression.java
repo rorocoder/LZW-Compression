@@ -7,12 +7,12 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Hashtable;
 
-public class Encode {
+public class LZWCompression {
 //	private String input;
 	private String stringOutput;
 	private HashMap<String, Integer> dict;
 	
-	public Encode (File inputFile) throws IOException
+	public LZWCompression (File inputFile) throws IOException
 	{
 		stringOutput = "";
 		dict = new HashMap <String, Integer> ();

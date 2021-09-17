@@ -7,5 +7,8 @@ public class TestLZW {
 		File testFile = new File ("lzw-file1.txt");
 		LZWCompression compressy= new LZWCompression (testFile);
 		
+		RohanDecoder decode = new RohanDecoder();
+		decode.decode();
+		
 	}
 }

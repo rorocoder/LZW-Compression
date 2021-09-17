@@ -8,3 +8,6 @@ decimals to binary before adding them to the string binaryString. binaryString i
 which is then converted to a byte array, which is then used by the FileOutputStream to write a binary file. 
 
 ROHAN: Ariana used 9 bits
+The decoder does not work, I am unsure if it is an issue with the decoder or your encoder
+It outputs something for file 1, but it is not right 
+It gets an error for file 3 

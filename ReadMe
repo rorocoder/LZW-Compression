@@ -11,3 +11,28 @@ ROHAN: Ariana used 9 bits
 The decoder does not work, I am unsure if it is an issue with the decoder or your encoder
 It outputs something for file 1, but it is not right 
 It gets an error for file 3 
+
+
+Time Running:
+Original:
+File 1:
+Program took 33.4976 milliseconds
+File 2:
+Program took 112.6673 milliseconds
+File 3:
+java.lang.NullPointerException
+Error: Cannot find "numberValues.get(0)/first value of old" in the dictionary
+Program took 1228.1222 milliseconds
+
+
+Changed:
+File 1:
+Program took 29.6402 milliseconds
+File 2:
+java.lang.NullPointerException
+Error: Decoder did not work for a reason other than the first value not being found in the dictionary
+Program took 94.8057 milliseconds
+File 3:
+java.lang.NullPointerException
+Error: Cannot find "numberValues.get(0)/first value of old" in the dictionary
+Program took 1214.8098 milliseconds
